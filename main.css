@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+html {
+  font-size: 62.5%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0 auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  line-height: 1.6;
+  font-size: 1.6rem;
+  overflow-x: hidden;
+  overflow-anchor: none;
+  background-color: #000344;
+  color: whitesmoke;
+  font-family: "Lato", sans-serif;
+}
+
+h1 {
+  padding: 2rem;
+}
+
+.weather__card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+}
+
+.weather__day {
+  font-size: 3rem;
+  letter-spacing: 3px;
+}
+
+.weather__icon {
+  font-size: 4rem;
+}
+/*# sourceMappingURL=main.css.map */
