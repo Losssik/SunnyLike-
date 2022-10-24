@@ -27,6 +27,7 @@ body {
 
 h1 {
   padding: 2rem;
+  // text-align: center;
 }
 
 .weather {
@@ -43,6 +44,7 @@ h1 {
   &__day {
     font-size: 3rem;
     letter-spacing: 3px;
+    
   }
 
   &__icon {

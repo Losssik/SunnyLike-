@@ -5,7 +5,10 @@ const weatherCard = document.querySelector(".weather__card");
 const maxTemperature = document.querySelector(".weather__maxtemp");
 const minTemperature = document.querySelector(".weather__mintemp");
 const wind = document.querySelector(".weather__wind");
+const searchBar = document.querySelector("#search__bar");
+const btnSearch = document.querySelector("#btn");
 
+// updating weather info on the site
 const updateWeather = function (data) {
   tescik.textContent = data.city.name;
   //converting from kelvin to celsius
@@ -28,9 +31,10 @@ const request = fetch(
   "https://api.openweathermap.org/data/2.5/forecast?lat=54.51&lon=18.53&appid=14b138fd386ea13bf4ae40177706e7a5"
 );
 
-const getWeatherInfo = function () {
+// getting weather data according to given coords
+const getWeatherInfo = function (lat, lon) {
   fetch(
-    "https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=14b138fd386ea13bf4ae40177706e7a5"
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=14b138fd386ea13bf4ae40177706e7a5`
   )
     .then((resposne) => resposne.json())
     .then(function (data) {
@@ -39,4 +43,26 @@ const getWeatherInfo = function () {
     });
 };
 
-getWeatherInfo();
+//// converting city name into coord LAT and LON
+
+const getCityName = function (city) {
+  fetch(
+    `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=14b138fd386ea13bf4ae40177706e7a5`
+  )
+    .then((res) => res.json())
+    .then(function (data) {
+      console.log(data);
+      //getting coords
+      const lat = data[0].lat;
+      const lon = data[0].lon;
+
+      console.log(lat, lon);
+
+      getWeatherInfo(lat, lon);
+    });
+};
+
+btnSearch.addEventListener("click", function () {
+  const city = searchBar.value;
+  getCityName(city);
+});
