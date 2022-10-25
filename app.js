@@ -1,12 +1,18 @@
 "use strict";
 
 const tescik = document.querySelector(".main__header");
+const cardContainer = document.querySelector(".weather");
 const weatherCard = document.querySelector(".weather__card");
 const maxTemperature = document.querySelector(".weather__maxtemp");
 const minTemperature = document.querySelector(".weather__mintemp");
 const wind = document.querySelector(".weather__wind");
 const searchBar = document.querySelector("#search__bar");
 const btnSearch = document.querySelector("#btn");
+
+// render error
+const renderError = function (msg) {
+  cardContainer.insertAdjacentText("beforeend", msg);
+};
 
 // updating weather info on the site
 const updateWeather = function (data) {
@@ -40,7 +46,8 @@ const getWeatherInfo = function (lat, lon) {
     .then(function (data) {
       console.log(data);
       updateWeather(data);
-    });
+    })
+    .catch((err) => alert(err));
 };
 
 //// converting city name into coord LAT and LON
@@ -59,10 +66,24 @@ const getCityName = function (city) {
       console.log(lat, lon);
 
       getWeatherInfo(lat, lon);
+    })
+    .catch((err) => {
+      console.log(err);
+      renderError(`couldnt find this city '${err.message}'`);
     });
 };
 
+// getting data from a search bar and passing its value to the function
 btnSearch.addEventListener("click", function () {
   const city = searchBar.value;
   getCityName(city);
+});
+
+// execution "saerch bar" when user presses ENTER
+
+searchBar.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    getCityName(searchBar.value);
+    searchBar.value = "";
+  }
 });
