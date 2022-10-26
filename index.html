@@ -10,6 +10,14 @@
   </head>
   <body>
     <h1 class="main__header">Sunnylike!</h1>
+    <div class="search">
+      <div class="flex">
+        <input type="text" placeholder="Enter city" id="search__bar" />
+        <button id="btn">
+          <ion-icon name="search-outline" class="search__icon"></ion-icon>
+        </button>
+      </div>
+    </div>
     <main class="weather">
       <div class="weather__card">
         <h3 class="weather__day">Monday</h3>
@@ -24,9 +32,8 @@
         <p class="weather__wind">8 km/h</p>
       </div>
 
-      <div class="search">
-        <input type="text" placeholder="Enter city" id="search__bar" />
-        <button id="btn"><ion-icon name="search-outline"></ion-icon></button>
+      <div class="error">
+        <p class="error__message"></p>
       </div>
     </main>
 

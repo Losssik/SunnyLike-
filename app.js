@@ -8,10 +8,18 @@ const minTemperature = document.querySelector(".weather__mintemp");
 const wind = document.querySelector(".weather__wind");
 const searchBar = document.querySelector("#search__bar");
 const btnSearch = document.querySelector("#btn");
+const errorContainer = document.querySelector(".error");
+const errroMessage = document.querySelector(".error__message");
 
 // render error
 const renderError = function (msg) {
-  cardContainer.insertAdjacentText("beforeend", msg);
+  errroMessage.textContent = msg;
+  errorContainer.style.padding = "2rem";
+  setTimeout(() => {
+    errorContainer.classList.add("hide");
+  }, 1500);
+
+  errorContainer.classList.remove("hide");
 };
 
 // updating weather info on the site
@@ -70,6 +78,7 @@ const getCityName = function (city) {
     .catch((err) => {
       console.log(err);
       renderError(`couldnt find this city '${err.message}'`);
+      console.log(err);
     });
 };
 
