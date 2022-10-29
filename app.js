@@ -22,8 +22,112 @@ const renderError = function (msg) {
   errorContainer.classList.remove("hide");
 };
 
+// get current user position
+const userCurrentLocation = navigator.geolocation.getCurrentPosition(function (
+  position
+) {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  getWeatherInfo(lat, lon);
+});
+
 // updating weather info on the site
 const updateWeather = function (data) {
+  //getting ID weather for correct displaying icon (ID IS RELATED WITH AN ICON)
+  const weatherIcon = data.list[0].weather[0].id;
+
+  //if rain display rain icon
+  if (
+    (weatherIcon >= 300 && weatherIcon <= 321) ||
+    (weatherIcon >= 500 && weatherIcon <= 531)
+  ) {
+    const htmlIcon = `
+    <div class="weather__icon__container">
+      <ion-icon
+        name="rainy-outline"
+        class="weather__icon"
+      ></ion-icon>
+    </div>
+  
+    `;
+
+    weatherCard.insertAdjacentHTML("afterbegin", htmlIcon);
+  }
+
+  //if cloud display cloud icon
+  if (weatherIcon >= 802 && weatherIcon <= 804) {
+    const htmlIcon = `
+    <div class="weather__icon__container">
+      <ion-icon
+        name="cloud-outline"
+        class="weather__icon"
+      ></ion-icon>
+    </div>
+  
+    `;
+
+    weatherCard.insertAdjacentHTML("afterbegin", htmlIcon);
+  }
+
+  //if sun display sun icon
+  if (weatherIcon === 800) {
+    const htmlIcon = `
+    <div class="weather__icon__container">
+      <ion-icon
+        name="sunny-outline"
+        class="weather__icon"
+      ></ion-icon>
+    </div>
+  
+    `;
+
+    weatherCard.insertAdjacentHTML("afterbegin", htmlIcon);
+  }
+  //if sun with cloud  display sun with cloud icon
+  if (weatherIcon === 801) {
+    const htmlIcon = `
+    <div class="weather__icon__container">
+      <ion-icon
+        name="partly-sunny-outline"
+        class="weather__icon"
+      ></ion-icon>
+    </div>
+  
+    `;
+
+    weatherCard.insertAdjacentHTML("afterbegin", htmlIcon);
+  }
+
+  //if thunderstorm display thunderstorm icon
+  if (weatherIcon >= 200 && weatherIcon <= 232) {
+    const htmlIcon = `
+    <div class="weather__icon__container">
+      <ion-icon
+        name="thunderstorm-outline"
+        class="weather__icon"
+      ></ion-icon>
+    </div>
+  
+    `;
+
+    weatherCard.insertAdjacentHTML("afterbegin", htmlIcon);
+  }
+
+  //if snow display snow icon
+  if (weatherIcon >= 600 && weatherIcon <= 622) {
+    const htmlIcon = `
+    <div class="weather__icon__container">
+      <ion-icon
+        name="snow-outline"
+        class="weather__icon"
+      ></ion-icon>
+    </div>
+  
+    `;
+
+    weatherCard.insertAdjacentHTML("afterbegin", htmlIcon);
+  }
+
   tescik.textContent = data.city.name;
   //converting from kelvin to celsius
   maxTemperature.textContent = `${(data.list[0].main.temp_max - 273.15).toFixed(
@@ -38,6 +142,7 @@ const updateWeather = function (data) {
   )} km/h`;
 
   //showing card
+
   weatherCard.style.opacity = 1;
 };
 
