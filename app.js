@@ -37,6 +37,7 @@ const updateWeather = function (data) {
   const weatherIcon = data.list[0].weather[0].id;
 
   //if rain display rain icon
+
   if (
     (weatherIcon >= 300 && weatherIcon <= 321) ||
     (weatherIcon >= 500 && weatherIcon <= 531)
@@ -146,9 +147,9 @@ const updateWeather = function (data) {
   weatherCard.style.opacity = 1;
 };
 
-const request = fetch(
+/* const request = fetch(
   "https://api.openweathermap.org/data/2.5/forecast?lat=54.51&lon=18.53&appid=14b138fd386ea13bf4ae40177706e7a5"
-);
+); */
 
 // getting weather data according to given coords
 const getWeatherInfo = function (lat, lon) {
@@ -201,3 +202,19 @@ searchBar.addEventListener("keypress", function (e) {
     searchBar.value = "";
   }
 });
+
+// date
+const date = new Date();
+console.log(date);
+const day = date.getDay();
+console.log(day);
+
+const options = { weekday: "long" };
+
+console.log(new Intl.DateTimeFormat("en-US", options).format(day));
+console.log(day);
+
+if (day === 0) {
+  let currentday = "niedziela";
+  console.log(currentday);
+}
