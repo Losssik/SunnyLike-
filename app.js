@@ -36,13 +36,16 @@ const userCurrentLocation = navigator.geolocation.getCurrentPosition(function (
 const updateWeather = function (data) {
   //getting ID weather for correct displaying icon (ID IS RELATED WITH AN ICON)
   const weatherIcon = data.list[0].weather[0].id;
-
-  //if rain display rain icon
-
-  if (
+  const isRainy =
     (weatherIcon >= 300 && weatherIcon <= 321) ||
-    (weatherIcon >= 500 && weatherIcon <= 531)
-  ) {
+    (weatherIcon >= 500 && weatherIcon <= 531);
+  const isCloudy = weatherIcon >= 802 && weatherIcon <= 804;
+  const isSunny = weatherIcon === 800;
+  const isPartlySunny = weatherIcon === 801;
+  const isThunderstorm = weatherIcon >= 200 && weatherIcon <= 232;
+  const isSnow = weatherIcon >= 600 && weatherIcon <= 622;
+
+  if (isRainy) {
     const htmlIcon = `
     <div class="weather__icon__container">
       <ion-icon
@@ -56,8 +59,7 @@ const updateWeather = function (data) {
     weatherCard.insertAdjacentHTML("afterbegin", htmlIcon);
   }
 
-  //if cloud display cloud icon
-  if (weatherIcon >= 802 && weatherIcon <= 804) {
+  if (isCloudy) {
     const htmlIcon = `
     <div class="weather__icon__container">
       <ion-icon
@@ -72,7 +74,7 @@ const updateWeather = function (data) {
   }
 
   //if sun display sun icon
-  if (weatherIcon === 800) {
+  if (isSunny) {
     const htmlIcon = `
     <div class="weather__icon__container">
       <ion-icon
@@ -86,7 +88,7 @@ const updateWeather = function (data) {
     weatherCard.insertAdjacentHTML("afterbegin", htmlIcon);
   }
   //if sun with cloud  display sun with cloud icon
-  if (weatherIcon === 801) {
+  if (isPartlySunny) {
     const htmlIcon = `
     <div class="weather__icon__container">
       <ion-icon
@@ -101,7 +103,7 @@ const updateWeather = function (data) {
   }
 
   //if thunderstorm display thunderstorm icon
-  if (weatherIcon >= 200 && weatherIcon <= 232) {
+  if (isThunderstorm) {
     const htmlIcon = `
     <div class="weather__icon__container">
       <ion-icon
@@ -116,7 +118,7 @@ const updateWeather = function (data) {
   }
 
   //if snow display snow icon
-  if (weatherIcon >= 600 && weatherIcon <= 622) {
+  if (isSnow) {
     const htmlIcon = `
     <div class="weather__icon__container">
       <ion-icon
