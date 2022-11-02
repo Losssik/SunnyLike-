@@ -10,6 +10,7 @@ const searchBar = document.querySelector("#search__bar");
 const btnSearch = document.querySelector("#btn");
 const errorContainer = document.querySelector(".error");
 const errroMessage = document.querySelector(".error__message");
+const currentDay = document.querySelector(".weather__day");
 
 // render error
 const renderError = function (msg) {
@@ -142,14 +143,13 @@ const updateWeather = function (data) {
     1
   )} km/h`;
 
+  // gettin current day
+  currentDay.textContent = day;
+
   //showing card
 
   weatherCard.style.opacity = 1;
 };
-
-/* const request = fetch(
-  "https://api.openweathermap.org/data/2.5/forecast?lat=54.51&lon=18.53&appid=14b138fd386ea13bf4ae40177706e7a5"
-); */
 
 // getting weather data according to given coords
 const getWeatherInfo = function (lat, lon) {
@@ -203,18 +203,8 @@ searchBar.addEventListener("keypress", function (e) {
   }
 });
 
-// date
+// getting current day
 const date = new Date();
-console.log(date);
-const day = date.getDay();
-console.log(day);
-
+let day = date.getDay();
 const options = { weekday: "long" };
-
-console.log(new Intl.DateTimeFormat("en-US", options).format(day));
-console.log(day);
-
-if (day === 0) {
-  let currentday = "niedziela";
-  console.log(currentday);
-}
+day = new Intl.DateTimeFormat("en-US", options).format(date);
