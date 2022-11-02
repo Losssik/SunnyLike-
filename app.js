@@ -34,6 +34,7 @@ const userCurrentLocation = navigator.geolocation.getCurrentPosition(function (
 
 // updating weather info on the site
 const updateWeather = function (data) {
+  weatherCard.replaceChildren();
   //getting ID weather for correct displaying icon (ID IS RELATED WITH AN ICON)
   const weatherIcon = data.list[0].weather[0].id;
   const isRainy =
@@ -44,6 +45,22 @@ const updateWeather = function (data) {
   const isPartlySunny = weatherIcon === 801;
   const isThunderstorm = weatherIcon >= 200 && weatherIcon <= 232;
   const isSnow = weatherIcon >= 600 && weatherIcon <= 622;
+
+  tescik.textContent = data.city.name;
+
+  const weathersInfo = `
+  <h3 class="weather__day">${day}</h3>
+  <p class="weather__maxtemp">${(data.list[0].main.temp_max - 273.15).toFixed(
+    1
+  )} 'C</p>
+  <p class="weather__mintemp">${(data.list[0].main.temp_min - 273.15).toFixed(
+    1
+  )} 'C</p>
+  <p class="weather__wind">${((data.list[0].wind.speed / 1000) * 3600).toFixed(
+    1
+  )} km/h</p>`;
+
+  weatherCard.insertAdjacentHTML("afterbegin", weathersInfo);
 
   if (isRainy) {
     const htmlIcon = `
@@ -131,22 +148,6 @@ const updateWeather = function (data) {
 
     weatherCard.insertAdjacentHTML("afterbegin", htmlIcon);
   }
-
-  tescik.textContent = data.city.name;
-  //converting from kelvin to celsius
-  maxTemperature.textContent = `${(data.list[0].main.temp_max - 273.15).toFixed(
-    1
-  )} 'C`;
-  minTemperature.textContent = `${(data.list[0].main.temp_min - 273.15).toFixed(
-    1
-  )} 'C  `;
-  //converting from km/h to m/s
-  wind.textContent = `${((data.list[0].wind.speed / 1000) * 3600).toFixed(
-    1
-  )} km/h`;
-
-  // gettin current day
-  currentDay.textContent = day;
 
   //showing card
 
