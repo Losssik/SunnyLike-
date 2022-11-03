@@ -35,6 +35,9 @@ const userCurrentLocation = navigator.geolocation.getCurrentPosition(function (
 // updating weather info on the site
 const updateWeather = function (data) {
   weatherCard.replaceChildren();
+
+  const today = data.list.at(0);
+
   //getting ID weather for correct displaying icon (ID IS RELATED WITH AN ICON)
   const weatherIcon = data.list[0].weather[0].id;
   const isRainy =
@@ -45,7 +48,7 @@ const updateWeather = function (data) {
   const isPartlySunny = weatherIcon === 801;
   const isThunderstorm = weatherIcon >= 200 && weatherIcon <= 232;
   const isSnow = weatherIcon >= 600 && weatherIcon <= 622;
-  const maxTemperature = (data.list[0].main.temp_max - 273.15).toFixed(1);
+  const maxTemperature = (today.main.temp_max - 273.15).toFixed(1);
   const minTemperature = (data.list[0].main.temp_min - 273.15).toFixed(1);
   const windSpeed = ((data.list[0].wind.speed / 1000) * 3600).toFixed(1);
 

@@ -53,6 +53,21 @@ button {
           box-shadow: 0px 0px 2px 2px black;
 }
 
+#nextDay {
+  margin-top: 1rem;
+  padding: 1rem 4rem;
+  font-size: 2rem;
+  border-radius: 6px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#nextDay:active {
+  -webkit-transform: translateY(3px);
+          transform: translateY(3px);
+}
+
 .search {
   margin-left: 2rem;
 }
